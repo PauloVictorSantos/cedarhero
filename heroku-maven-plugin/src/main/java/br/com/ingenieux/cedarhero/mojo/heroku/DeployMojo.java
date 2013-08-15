@@ -37,7 +37,8 @@ import com.jcraft.jsch.Session;
 import com.jcraft.jsch.UserInfo;
 
 /**
- * <p>Deploys the staging (prepared) repository under Heroku.
+ * <p>Deploys the staging (prepared) repository under Heroku.</p>
+ * <p>See the docs for {@link PrepareMojo} as well.</p>
  *
  * <p>Obligatory showoff example (for existing java projects):</p>
  *
@@ -53,7 +54,7 @@ import com.jcraft.jsch.UserInfo;
  *   &lt;/plugins&gt;
  * </pre>
  *
- * <p>Once pom is configured (and you've got a packaged war project, you can simply prepare and deploy with:</p>
+ * <p>Once pom is configured (and you've got a packaged war project in the right directory), you can simply prepare and deploy with:</p>
  *
  * <p>$ mvn heroku:prepare heroku:deploy</p>
  */
