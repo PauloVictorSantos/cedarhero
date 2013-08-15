@@ -1,5 +1,19 @@
 package br.com.ingenieux.cedarhero.mojo.heroku;
 
+/*
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import org.apache.commons.io.FileUtils;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
@@ -12,6 +26,31 @@ import org.eclipse.jgit.lib.*;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * <p>Creates / prepares a Staging Repository for Heroku Deployment</p>
+ *
+ * <p>A Staging Repository is a git repository (by default, under <pre>${basedir}/tmp-git-deployment-staging<pre> made from the following elements:</p>
+ *
+ * <ul>
+ *   <li>A clone of the <pre>sourceStackRepository</pre> git repository (defaults to the jetty runner stack, <a href="https://bitbucket.org/ingenieux/cedarhero-jetty">https://bitbucket.org/ingenieux/cedarhero-jetty</a>)</li>
+ *   <li>The webapp contents under <pre>/webapp</pre></li>
+ * </ul>
+ *
+ * <p>The sourceStack includes a "stub pom", meant to satisfy herokus' need for a pom.xml.</p>
+ *
+ * <p>In the future, it would be used to optimize the slug generation process (like assigning/replacing xml config
+ * files for addon values, or something like that).</p>
+ *
+ * <p>For now, a barebones sourceStack git repository includes:</p>
+ * <ul>
+ *   <li>The basic Procfile</li>
+ *   <li>The webapp Runtime</li>
+ *   <li>Other settings</li>
+ * </ul>
+ *
+ * <p>You could consider either forking the <pre>sourceStackRepository</pre> or changing it locally prior to deployment. Future versions will pay more attention to it</p>
+ *
+ */
 @Mojo(name = "prepare")
 public class PrepareMojo extends AbstractHerokuMojo {
   /**

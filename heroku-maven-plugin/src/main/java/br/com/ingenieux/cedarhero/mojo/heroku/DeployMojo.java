@@ -1,5 +1,18 @@
 package br.com.ingenieux.cedarhero.mojo.heroku;
 
+/*
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 import static org.apache.commons.lang.StringUtils.isBlank;
 
 import java.io.File;
@@ -23,6 +36,27 @@ import org.eclipse.jgit.transport.URIish;
 import com.jcraft.jsch.Session;
 import com.jcraft.jsch.UserInfo;
 
+/**
+ * <p>Deploys the staging (prepared) repository under Heroku.
+ *
+ * <p>Obligatory showoff example (for existing java projects):</p>
+ *
+ * <code>
+ *   <plugins>
+ *     <plugin>
+ *       <groupId>br.com.ingenieux.cedarhero</groupId>
+ *       <artifactId>heroku-maven-plugin</artifactId>
+ *       <configuration>
+ *         <app>lovely-app-7777</app>
+ *       </configuration>
+ *     </plugin>
+ *   </plugins>
+ * </code>
+ *
+ * <p>Once pom is configured (and you've got a package war project, you can simply prepare and deploy with:</p>
+ *
+ * <p><pre>$ mvn heroku:prepare heroku:deploy</pre></p>
+ */
 @Mojo(name = "deploy")
 public class DeployMojo extends AbstractHerokuMojo {
 	/**
@@ -32,8 +66,7 @@ public class DeployMojo extends AbstractHerokuMojo {
 	File stagingDirectory;
 
 	/**
-	 * The server id in maven settings.xml to use for AWS Services Credentials
-	 * (accessKey / secretKey)
+   * The local path to the SSH key to be used.
 	 */
 	@Parameter(property = "heroku.sshKey", defaultValue = "${user.home}/.ssh/id_rsa")
 	protected String sshKey;
@@ -98,7 +131,5 @@ public class DeployMojo extends AbstractHerokuMojo {
 		PushCommand pushCommand = repo.push().setRemote(remoteUrl).add("master").setProgressMonitor(new TextProgressMonitor()).setForce(true);
 				
 		pushCommand.call();
-
-		// repo.push().setRemote("")
 	}
 }
