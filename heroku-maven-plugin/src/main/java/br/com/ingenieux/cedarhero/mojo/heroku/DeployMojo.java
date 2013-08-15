@@ -41,19 +41,19 @@ import com.jcraft.jsch.UserInfo;
  *
  * <p>Obligatory showoff example (for existing java projects):</p>
  *
- * <code>
- *   <plugins>
- *     <plugin>
- *       <groupId>br.com.ingenieux.cedarhero</groupId>
- *       <artifactId>heroku-maven-plugin</artifactId>
- *       <configuration>
- *         <app>lovely-app-7777</app>
- *       </configuration>
- *     </plugin>
- *   </plugins>
- * </code>
+ * <pre>
+ *   &lt;plugins&gt;
+ *     &lt;plugin&gt;
+ *       &lt;groupId&gt;br.com.ingenieux.cedarhero&lt;/groupId&gt;
+ *       &lt;artifactId&gt;heroku-maven-plugin&lt;/artifactId&gt;
+ *       &lt;configuration&gt;
+ *         &lt;app&gt;lovely-app-7777&lt;/app&gt;
+ *       &lt;/configuration&gt;
+ *     &lt;/plugin&gt;
+ *   &lt;/plugins&gt;
+ * </pre>
  *
- * <p>Once pom is configured (and you've got a package war project, you can simply prepare and deploy with:</p>
+ * <p>Once pom is configured (and you've got a packaged war project, you can simply prepare and deploy with:</p>
  *
  * <p>$ mvn heroku:prepare heroku:deploy</p>
  */
