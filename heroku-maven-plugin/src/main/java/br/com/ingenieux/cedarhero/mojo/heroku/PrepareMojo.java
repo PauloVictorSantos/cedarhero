@@ -29,7 +29,7 @@ import java.io.IOException;
 /**
  * <p>Creates / prepares a Staging Repository for Heroku Deployment</p>
  *
- * <p>A Staging Repository is a git repository (by default, under [basedir]/tmp-git-deployment-staging made from the following elements:</p>
+ * <p>A Staging Repository is a git repository (by default, under [basedir]/tmp-git-deployment-staging) made from the following elements:</p>
  *
  * <ul>
  *   <li>A clone of the [sourceStackRepository] git repository (defaults to the jetty runner stack, <a href="https://bitbucket.org/ingenieux/cedarhero-jetty">https://bitbucket.org/ingenieux/cedarhero-jetty</a>)</li>
