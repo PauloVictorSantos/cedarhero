@@ -30,40 +30,16 @@
 
     <dependencies>
         <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>commons-codec</groupId>
-            <artifactId>commons-codec</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-plugin-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-settings</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.sonatype.plexus</groupId>
-            <artifactId>plexus-build-api</artifactId>
         </dependency>
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.maven</groupId>
-            <artifactId>maven-core</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.eclipse.jgit</groupId>
             <artifactId>org.eclipse.jgit</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>commons-collections</groupId>
-            <artifactId>commons-collections</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.maven.plugin-tools</groupId>
@@ -74,10 +50,6 @@
             <artifactId>plexus-utils</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.maven.plugin-testing</groupId>
-            <artifactId>maven-plugin-testing-harness</artifactId>
-        </dependency>
-        <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
         </dependency>
@@ -85,6 +57,5 @@
             <groupId>com.jcraft</groupId>
             <artifactId>jsch</artifactId>
         </dependency>
-
     </dependencies>
 </project>
