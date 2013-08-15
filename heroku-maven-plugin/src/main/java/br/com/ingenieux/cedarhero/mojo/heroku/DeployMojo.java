@@ -55,7 +55,7 @@ import com.jcraft.jsch.UserInfo;
  *
  * <p>Once pom is configured (and you've got a package war project, you can simply prepare and deploy with:</p>
  *
- * <p><pre>$ mvn heroku:prepare heroku:deploy</pre></p>
+ * <p>$ mvn heroku:prepare heroku:deploy</p>
  */
 @Mojo(name = "deploy")
 public class DeployMojo extends AbstractHerokuMojo {

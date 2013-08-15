@@ -29,11 +29,11 @@ import java.io.IOException;
 /**
  * <p>Creates / prepares a Staging Repository for Heroku Deployment</p>
  *
- * <p>A Staging Repository is a git repository (by default, under <pre>${basedir}/tmp-git-deployment-staging<pre> made from the following elements:</p>
+ * <p>A Staging Repository is a git repository (by default, under [basedir]/tmp-git-deployment-staging made from the following elements:</p>
  *
  * <ul>
- *   <li>A clone of the <pre>sourceStackRepository</pre> git repository (defaults to the jetty runner stack, <a href="https://bitbucket.org/ingenieux/cedarhero-jetty">https://bitbucket.org/ingenieux/cedarhero-jetty</a>)</li>
- *   <li>The webapp contents under <pre>/webapp</pre></li>
+ *   <li>A clone of the [sourceStackRepository] git repository (defaults to the jetty runner stack, <a href="https://bitbucket.org/ingenieux/cedarhero-jetty">https://bitbucket.org/ingenieux/cedarhero-jetty</a>)</li>
+ *   <li>The webapp contents under /webapp</li>
  * </ul>
  *
  * <p>The sourceStack includes a "stub pom", meant to satisfy herokus' need for a pom.xml.</p>
@@ -48,7 +48,7 @@ import java.io.IOException;
  *   <li>Other settings</li>
  * </ul>
  *
- * <p>You could consider either forking the <pre>sourceStackRepository</pre> or changing it locally prior to deployment. Future versions will pay more attention to it</p>
+ * <p>You could consider either forking the sourceStackRepository or changing it locally prior to deployment. Future versions will pay more attention to it</p>
  *
  */
 @Mojo(name = "prepare")
