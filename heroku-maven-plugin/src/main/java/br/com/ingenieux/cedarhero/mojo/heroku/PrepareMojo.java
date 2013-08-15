@@ -15,6 +15,10 @@ package br.com.ingenieux.cedarhero.mojo.heroku;
  */
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.filefilter.FileFilterUtils;
+import org.apache.commons.io.filefilter.IOFileFilter;
+import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.eclipse.jgit.api.AddCommand;
@@ -77,19 +81,64 @@ public class PrepareMojo extends AbstractHerokuMojo {
 
     File webappStagingDirectory = new File(stagingDirectory, "webapp");
 
-    if (webappStagingDirectory.exists()) {
-      FileUtils.deleteDirectory(webappStagingDirectory);
+    if (!webappStagingDirectory.exists()) {
+      webappStagingDirectory.mkdirs();
     }
 
-    webappStagingDirectory.mkdirs();
+    log("Syncing from %s to %s", sourceArtifactDirectory, webappStagingDirectory);
 
-    log("Copying from %s to %s", sourceArtifactDirectory, webappStagingDirectory);
-
-    FileUtils.copyDirectory(sourceArtifactDirectory, webappStagingDirectory);
+    syncDirs(gitRepo, sourceArtifactDirectory, webappStagingDirectory);
 
     appendChanges(gitRepo);
+  }
 
+  private void syncDirs(Git gitRepo, File sourceArtifactDirectory, File webappStagingDirectory) throws IOException {
+    /**
+     * First Step: Copy sourceArtifactDirectory to webappStaging (only modified files)
+     */
+    for (File origFile : FileUtils.listFiles(sourceArtifactDirectory, FileFilterUtils.trueFileFilter(), TrueFileFilter.INSTANCE)) {
+      String relPath = origFile.getAbsolutePath().substring(sourceArtifactDirectory.getAbsolutePath().length());
 
+      File otherFile = new File(webappStagingDirectory, relPath);
+
+      boolean mustCopy = false;
+
+      if (otherFile.exists()) {
+        /**
+         * TBD: Compare by using hashes instead
+         */
+        mustCopy = (otherFile.lastModified() != origFile.lastModified());
+      } else {
+        mustCopy = true;
+      }
+
+      if (mustCopy) {
+        otherFile.getParentFile().mkdirs();
+
+        log("Copying %s to %s", relPath, otherFile.getPath());
+
+        FileUtils.copyFile(origFile, otherFile, true);
+      }
+    }
+
+    /**
+     * Second Step: Remove anything under webappStagingDirectory not in sourceArtifactDirectory
+     */
+    for (File stagedFile : FileUtils.listFiles(webappStagingDirectory, FileFilterUtils.trueFileFilter(), TrueFileFilter.INSTANCE)) {
+      String relPath = stagedFile.getAbsolutePath().substring(webappStagingDirectory.getAbsolutePath().length());
+
+      File sourceFile = new File(sourceArtifactDirectory, relPath);
+
+      boolean mustDelete = false;
+
+      mustDelete = !sourceFile.exists();
+
+      if (mustDelete) {
+        log("Excluding: %s", relPath);
+
+        stagedFile.delete();
+      }
+    }
   }
 
   private void appendChanges(Git gitRepo) throws GitAPIException, IOException {
