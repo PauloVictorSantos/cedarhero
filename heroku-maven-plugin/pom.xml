@@ -4,13 +4,13 @@
     <parent>
         <groupId>br.com.ingenieux.cedarhero</groupId>
         <artifactId>cedarhero</artifactId>
-        <version>0.0.2-SNAPSHOT</version>
+        <version>0.0.3-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>br.com.ingenieux.cedarhero</groupId>
     <artifactId>heroku-maven-plugin</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.3-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
     <name>heroku-maven-plugin</name>
 
