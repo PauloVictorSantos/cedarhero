@@ -7,7 +7,9 @@ cedarhero works by:
   * creating a directory (by default, called tmp-git-staging) under your base directory
   * git cloning a base appserver repository (by default, [cedarhero-jetty](https://bitbucket.org/ingenieux/cedarhero-jetty))
   * copying your webapp contents into /webapp
-  * setting the remote uri
+  * setting the remote uri to a heroku
+  * committing the repo locally
+  * pushing it to heroku
 
 ## Which cases makes cedarhero more suitable?
 
